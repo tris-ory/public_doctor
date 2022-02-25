@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+header {
+    max-height: 15%;
+}
+main {
+    min-height: 80%;
+}
+footer {
+    height: 5%;
+}

@@ -20,7 +20,7 @@ class Patients extends Database
         $this->db = $db->getDbh();
     }
 
-    public function createPatient()
+    public function createPatients()
     {
         $request = 'INSERT INTO `patients` (firstname, lastname, address,city, zipcode, phone,mail) 
                     VALUES (:firstname, :lastname, :address, :city,:zipcode, :phone,:mail)';

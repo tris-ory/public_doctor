@@ -1,6 +1,13 @@
 <?php
 require_once '../models/patients.php';
+require_once '../models/RendezVous.php';
+require_once '../controllers/PatientsController.php';
+
 $pat = new Patients();
+$ctrl = new PatientsController();
+if (!empty($_POST['del'])) {
+    $ctrl->delPatients($_POST['del']);
+}
 $patients = $pat->listPatients();
 ?>
     <!doctype html>
