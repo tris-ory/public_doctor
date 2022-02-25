@@ -3,7 +3,6 @@
 // Date/time
 $date_min = strtotime("1900-01-01");
 
-
 $hours = [
     'morning_open' => strtotime('09:00'),
     'morning_close' => strtotime('12:00'),
@@ -18,6 +17,16 @@ $RX_ZIP = '/^\d{5}$/';
 $RX_PHONE = '/^\d{10}$/';
 $RX_TIME = '/^((0|1)\d|2[0-3]):[0-5]\d$/';
 
-// Others
+// Formatting date/time
 $date_format = 'Y-m-d';
 $time_format = 'H:i';
+
+// Navbar content
+$nav_items = ['Index' => '',
+    'Médecins' => 'doctors',
+    'Patients' => 'patients',
+    'Rendez-vous' => 'rendezvous'];
+
+$nav_functions = ['Afficher' => 'list',
+    'Créer' => 'create',
+    'Éditer' => 'update'];

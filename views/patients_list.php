@@ -9,19 +9,13 @@ if (!empty($_POST['del'])) {
     $ctrl->delPatients($_POST['del']);
 }
 $patients = $pat->listPatients();
+
+$page_title = 'Liste des patients';
+$actif = 'Patients';
+include_once 'helpers/head.php';
+include_once 'helpers/header.php';
 ?>
-    <!doctype html>
-    <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <title>Hello, world!</title>
-    </head>
-<body>
-<div class="container">
-    <form method="POST"  class="form-check">
+    <form method="POST" class="form-check">
         <table>
             <thead>
             <tr>
@@ -51,5 +45,7 @@ $patients = $pat->listPatients();
             <?php endforeach; ?>
             </tbody>
         </table>
-        <input type="submit" class="btn btn-primary" value="Supprimer sélectionnés" />
+        <input type="submit" class="btn btn-primary" value="Supprimer sélectionnés"/>
     </form>
+<?php
+include_once 'helpers/footer.php';

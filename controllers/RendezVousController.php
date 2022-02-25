@@ -67,7 +67,6 @@ class RendezVousController
     }
 
     public function validateRdv(){
-        global $date_format, $RX_TIME;
         // 1st, test if doctor & patient exist
         if(empty($_POST['doc'])){
             $this->errors['doc'] = 'Veuillez choisir un médecin';
@@ -92,31 +91,34 @@ class RendezVousController
             $this->rdv->date = $_POST['date'];
         }
         // Then the hours
-        if(empty($_POST['start'])){
+        if (empty($_POST['start'])) {
             $this->errors['start'] = 'Veuillez renseigner une heure';
         } elseif (!$this->validTime($_POST['start'])) {
             $this->errors['start'] = 'Veuillez renseigner une heure valide';
         } else {
             $this->rdv->start = $_POST['start'];
         }
-        if(empty($_POST['end'])){
+        if (empty($_POST['end'])) {
             $this->errors['start'] = 'Veuillez renseigner une heure';
-        } elseif (!$this->validTime($_POST['end']) || strtotime($_POST['start'])>strtotime($_POST['end'])) {
+        } elseif (!$this->validTime($_POST['end']) || strtotime($_POST['start']) > strtotime($_POST['end'])) {
             $this->errors['end'] = 'Veuillez renseigner une heure valide';
         } else {
             $this->rdv->end = $_POST['end'];
         }
         // Now verify
-        if(empty($this->errors)){
-            if($this->rdv->doctorHasRendezVous()){
+        if (empty($this->errors)) {
+            if ($this->rdv->doctorHasRendezVous()) {
                 $errors['doc_already_rdv'] = 'Le médecin a déjà un rendez-vous';
             }
-            if($this->rdv->patientHasRendezVous()){
+            if ($this->rdv->patientHasRendezVous()) {
                 $errors['pat_already_rdv'] = 'Le patient a déjà un rendez-vous';
             }
         }
-        if(empty($this->errors)){
-            $this->rdv->insert();
+        if (empty($this->errors)) {
+            $result = $this->rdv->insert();
+        } else {
+            $result = false;
         }
+        return $result;
     }
 }

@@ -1,8 +1,15 @@
 <?php
-include_once '../config.php';
-include_once '../models/doctors.php';
-include_once '../controllers/DoctorsController.php';
-include_once '../models/speciality.php';
+require_once '../config.php';
+require_once '../models/doctors.php';
+require_once '../controllers/DoctorsController.php';
+require_once '../models/speciality.php';
+
+$page_title = 'Mettre à jour la fiche médecin';
+$actif = 'Médecins';
+include_once 'helpers/head.php';
+include_once 'helpers/header.php';
+
+
 
 // Create a temp Speciality, call the getSpecialities method then unset the var
 $s = new Speciality();
@@ -37,7 +44,7 @@ if (!isset($_POST['submit'])) {
 }
 // if we haven't select the doctor
 if ($action == 'select') {
-    $doctors = $doc->getOnlyName();
+    $doctors = $doc->getOnlyName($id);
 } elseif($action == 'update'){
     if(!isset($current)){
         $current = $doc->getDoctorById($id);
@@ -86,7 +93,7 @@ if ($action == 'select') {
                 </div>
             </fieldset>
             <fieldset class="row">
-                <legend col="col-12">Contact&nbsp;:</legend>
+                <legend class="col-12">Contact&nbsp;:</legend>
                 <div class="col-5">
                     <label for="address" class="form-label">Adresse&nbsp;:</label>
                     <input type="text" name="address" id="address" class="form-control"
@@ -113,7 +120,7 @@ if ($action == 'select') {
                 </div>
                 <div class="col-5">
                     <label for="mail">Adresse mail&nbsp;:</label>
-                    <input type="mail" name="mail" id="mail" class="form-control"
+                    <input type="email" name="mail" id="mail" class="form-control"
                            placeholder="<?= $current['mail'] ?>"/>
                     <span class="text-danger"><?= empty($error['mail']) ? '' : $error['mail'] ?></span>
                 </div>
@@ -139,7 +146,6 @@ if ($action == 'select') {
         </form>
     <?php elseif ($action == 'ok'): ?>
     <p class="h1">La mise à jour s'est bien déroulée</p>
-    <?php endif; ?>
-</div>
-</body>
-</html>
+    <?php endif;
+
+include_once 'helpers/footer.php';
